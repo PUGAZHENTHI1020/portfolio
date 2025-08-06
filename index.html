@@ -6,48 +6,141 @@
   <title>Pugazhenthi C S | Cybersecurity Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <style>
-    body {
+    :root {
+      --bg: #0a0f0d;
+      --fg: #c7f9cc;
+      --primary: #00ff90;
+      --card: #101d1a;
+      --grid-bg: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="none" stroke="%2300ff90" stroke-width="0.3" /></svg>');
+    }
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
       font-family: 'JetBrains Mono', monospace;
-      background: url('https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      transition: background 0.5s ease;
+      background-color: var(--bg);
+      background-image: var(--grid-bg);
+      background-size: 20px 20px;
+      color: var(--fg);
+      line-height: 1.6;
     }
-    nav, header, section, footer {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 1em;
-      margin: 1em;
-      border-radius: 8px;
+    nav {
+      background-color: var(--card);
+      padding: 15px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-    nav a, footer p, section a {
-      color: #f9c74f;
+    nav a {
+      color: var(--primary);
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
     }
-    .project a, .resume-button {
-      background-color: #f94144;
-      color: white;
-      padding: 0.5em 1em;
-      border-radius: 4px;
+    nav a:hover {
+      color: #b8ffcc;
+      text-shadow: 0 0 5px var(--primary);
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: var(--primary);
+    }
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      word-wrap: break-word;
+    }
+    section {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 255, 144, 0.2);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: var(--primary);
       text-decoration: none;
     }
-    .project a:hover, .resume-button:hover {
-      background-color: #f3722c;
+    .project {
+      margin-bottom: 30px;
+      padding: 15px;
+      background-color: var(--bg);
+      border-left: 5px solid var(--primary);
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .toggle-mode {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: #000;
-      color: #fff;
-      padding: 0.5em;
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 12px var(--primary);
+    }
+    .resume-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: var(--bg);
       border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .resume-button:hover {
+      box-shadow: 0 0 18px var(--primary);
+    }
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background-color: var(--primary);
+      color: var(--bg);
       cursor: pointer;
-      z-index: 999;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--fg);
+      font-size: 0.9em;
     }
   </style>
 </head>
-<body data-theme="dark">
-  <div class="toggle-mode" onclick="toggleTheme()">Toggle Mode</div>
+<body>
   <nav>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -56,75 +149,105 @@
     <a href="#certificates">Certificates</a>
     <a href="#contact">Contact</a>
   </nav>
+
   <header>
-    <h1>PUGAZHENTHI C S</h1>
+    <h1>Pugazhenthi C S</h1>
     <p>Cybersecurity Enthusiast | Ethical Hacker | Web App Defender</p>
   </header>
+
   <section id="about">
-    <h2>🛡 Pugazhenthi C S – Cybersecurity Portfolio</h2>
-    <p>Welcome to my personal cybersecurity portfolio! This site showcases my technical skills, hands-on projects, certifications, and contact links – built entirely with HTML, CSS, and JavaScript.</p>
-    <p>I am a cybersecurity enthusiast with a background in ethical hacking, penetration testing, and web application security. I enjoy exploring vulnerabilities and building tools to detect and fix them. This portfolio serves as a digital profile highlighting:</p>
-    <ul>
-      <li>🔍 My practical cybersecurity skills</li>
-      <li>🛠 Tools I work with: Nmap, Burp Suite, Metasploit, etc.</li>
-      <li>📁 Real-world projects with GitHub links</li>
-      <li>📜 Certifications from Cybrary, Forage, and others</li>
-      <li>📄 Resume and contact info</li>
-    </ul>
+    <h2>🧑 About Me</h2>
+    <p>Cybersecurity enthusiast with strong hands-on experience in ethical hacking, web application security, and network defense. Proficient with tools like Nmap, Burp Suite, Wireshark, and Metasploit. Completed real-world projects and internships involving vulnerability assessment, penetration testing, and scripting. Adept at identifying vulnerabilities and proposing effective security measures..</p>
   </section>
+
   <section id="skills">
-    <h2>🛠 Technologies Used</h2>
-    <ul>
-      <li>HTML5, CSS3, Vanilla JavaScript</li>
-      <li>Responsive design with custom dark UI</li>
-      <li>Intersection Observer API for scroll animations</li>
-      <li>Hosted resume and certificate links via Google Drive</li>
-    </ul>
-  </section>
+  <h2>🛠️ Technical Skills</h2>
+  <ul>
+    <li>Tools & Frameworks – Nmap, Burp Suite, Wireshark, Metasploit, Nikto, Hydra, Gobuster, SQLmap</li>
+    <li>Web Application Security – OWASP Top 10, XSS, SQLi, CSRF, IDOR, session handling</li>
+    <li>Network Security – OSI model, TCP/IP, ARP/DNS spoofing, DHCP starvation</li>
+    <li>Vulnerability Assessment – Nessus, OpenVAS, CVSS scoring, reporting</li>
+    <li>Operating Systems – Kali Linux, Ubuntu, Windows, Parrot OS</li>
+    <li>Scripting & Automation – Python, Bash (custom scanning & payload tools)</li>
+    <li>Threat Intelligence – theHarvester, Recon-ng, Shodan, GeoSpy</li>
+    <li>Forensics – log analysis, hash validation, data recovery basics</li>
+    <li>Compliance & Risk – ISO/IEC 27001, NIST, ISMS concepts</li>
+    <li>Version Control – Git</li>
+  </ul>
+</section>
+
   <section id="projects">
-    <h2>📂 Project Highlights</h2>
+    <h2>📁 Projects</h2>
+
     <div class="project">
-      <h3>💉 SQL Injection Analysis</h3>
-      <p>Discovered SQLi vulnerability in a login form. Performed manual injection and automation using SQLmap.</p>
-      <a href="https://github.com/pugazhcse/sql-injection-analysis" target="_blank">View Project</a>
+      <h3>💉 SQL Injection Analysis – Web App Penetration Testing</h3>
+      <ul>
+        <li>Discovered SQL Injection vulnerability in a custom-built login form</li>
+        <li>Performed login bypass using <code>' OR '1'='1</code> payload</li>
+        <li>Used SQLMap to extract backend database structure and data</li>
+        <li>Captured HTTP request/response using Burp Suite</li>
+        <li>Documented findings and suggested remediation steps</li>
+        <li><strong>🔗 GitHub:</strong> <a href="https://github.com/PUGAZHENTHI1020/Web-Application-Penetration-Testing-SQL-Injection-Analysis.git" target="_blank">View Project</a></li>
+      </ul>
     </div>
+
     <div class="project">
-      <h3>🛡 Web Vulnerability Scanner (Python)</h3>
-      <p>Custom scanner to detect XSS, CSRF, and SQLi using Requests, BeautifulSoup, and Regex.</p>
-      <a href="https://github.com/pugazhcse/web-vuln-scanner" target="_blank">View Project</a>
-    </div>
-    <div class="project">
-      <h3>📊 Fraud Detection with Machine Learning</h3>
-      <p>Built a fraud detection model using Random Forest & Gradient Boosting for online payments.</p>
+      <h3>📊 Fraud Detection Using Machine Learning</h3>
+      <ul>
+        <li>Final year project to detect fraudulent transactions using classification algorithms</li>
+        <li>Used Python, Pandas, and Scikit-learn with preprocessing and feature engineering</li>
+        <li>Trained with Random Forest and Decision Tree models, achieving over 90% accuracy</li>
+        <li>Visualized results using ROC curve, confusion matrix, and precision-recall graphs</li>
+        <li>Recommended integration into financial platforms for real-time fraud flagging</li>
     </div>
   </section>
+
   <section id="resume">
     <h2>📄 Resume</h2>
-    <a href="Pugazhenthi_Resume.pdf" class="resume-button" target="_blank">View Resume</a>
-    <br><br>
-    <a href="https://www.naukri.com/mnjuser/profile/view?id=&altresid" class="resume-button" target="_blank">View Naukri Profile</a>
+    <a href="https://drive.google.com/file/d/1iwK2fuUtSgJ46vPz8QBw35pBNYIRwj7y/view?usp=sharing" class="resume-button" target="_blank">📄 View Resume</a>
   </section>
+
   <section id="certificates">
-    <h2>📜 Certifications</h2>
+    <h2>📜 Certificates</h2>
     <ul>
-      <li>Wireless Network Hacking – Cybrary</li>
-      <li>Web Application Hacking – Cybrary</li>
-      <li>Phishing Simulation – Forage</li>
-      <li>Introduction to Cybersecurity – Cybrary</li>
+      <li><a href="https://drive.google.com/file/d/1KV3uAKvBl1NKOUOnq25yDXKIVg0ftx-U/view?usp=sharing">compTIA security+ Certificate - compTIA</a></li>
+      <li><a href="https://drive.google.com/file/d/1FDKXnjzZtms4fZaxg956V0es2jGEjFF_/view?usp=sharing">Cybersecurity - FITA</a></li>
+      <li><a href="https://drive.google.com/file/d/1vNgHjkTzPf0lEVE_ApqW84qkGJNrP7HA/view?usp=sharing">Defensive Security Operation - Cybrary</a></li>
+      <li><a href="https://drive.google.com/file/d/1QKLejhkhEi1VSd6hKYTvKRSY7TkGg8cv/view?usp=sharing">Wireless Network Hacking - Cybrary</a></li>
+      <li><a href="https://drive.google.com/file/d/1fjwmJtWqV4h16cnOkPJwndXPrZ1JQGWW/view?usp=sharing">Web Hacking - Cybrary</a></li>
     </ul>
   </section>
+
   <section id="contact">
-    <h2>📞 Contact</h2>
-    <p><a href="https://www.linkedin.com/in/pugazhenthi-cybersecurity/">LinkedIn</a> | <a href="https://github.com/PUGAZHENTHI1020">GitHub</a></p>
+    <h2>🔗 Let’s connect</h2>
+    <p>
+      <a href="linkedin.com/in/pugazhenthi-cybersecurity" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/PUGAZHENTHI1020" target="_blank">GitHub</a>
+       <a href="https://www.naukri.com/mnjuser/profile?id=&altresid" target="_blank">naukri</a>
+    </p>
   </section>
+
   <footer>
-    <p>© 2025 Pugazhenthi C S | All Rights Reserved</p>
+    &copy; 2025 Pugazhenthi C S | All Rights Reserved
   </footer>
+
+  <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">⬆️ Top</button>
+
   <script>
-    function toggleTheme() {
-      const current = document.body.getAttribute("data-theme");
-      document.body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    window.onscroll = () => {
+      const btn = document.getElementById("scrollTopBtn");
+      btn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none";
+    };
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll("section").forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
